@@ -18,11 +18,5 @@ public class Main {
         moviesFrancais.delete(moviesFrancais.findByTitle("Poszukiwany-Poszukiwana"));
         moviesFrancais.showMovieInfo();
 
-
-
-
-
-
-
     }
 }
