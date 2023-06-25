@@ -9,6 +9,9 @@ public class Main {
 
         ArrayOperations swapping = new ArrayOperations<>();
 
+
+
+
         for (Object o : swapping.swapArrayElements(message, 0, 3)) {
             System.out.print(o + " ");
         }

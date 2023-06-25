@@ -7,33 +7,30 @@ public class ArrayOperations<T> {
 
     public Object[] swapArrayElements(Object[] array, int firstSwapIndex, int secondSwapIndex) {
 
-        Object[] result = array.clone();
-        Object[] temporary = array.clone();
+        Object[] temporary = new Object[2];// mamy dwa elementy do zamiany
 
-        boolean isSwappingArrayPossible = true;
         if ((array.length < 2)
                 || (firstSwapIndex < 0 || firstSwapIndex > array.length - 1)
                 || (secondSwapIndex < 0 || secondSwapIndex > array.length - 1)) {
-            isSwappingArrayPossible = false;
-            printErrorMessage();
             return null;
-        } else if (firstSwapIndex == secondSwapIndex)
+        } else if (firstSwapIndex == secondSwapIndex) {
             return array;
-
-        if (isSwappingArrayPossible) {
-            for (int i = 0; i < array.length; i++) {
-
-                result[firstSwapIndex] = temporary[secondSwapIndex];
-                array[secondSwapIndex] = temporary[firstSwapIndex];
-                result[secondSwapIndex] = array[secondSwapIndex];
+        } else {
+                temporary[0] = array[firstSwapIndex];
+                temporary[1] = array[secondSwapIndex];
+                array[firstSwapIndex] = temporary[1];
+                array[secondSwapIndex] = temporary[0];
             }
-        }
-        return result;
-    }
-
-    private void printErrorMessage() {
-        System.out.println("Sorry swapping it's not possible.");
-        System.out.println("Please check if array isn't too small (array must have minimum 2 elements to swap)," +
-                "or index od element to be swapped are incorrect- out of bounds of an array);}");
+        return array;
     }
 }
+// komentarz Emila:
+//
+//        trochę zbyt duża
+//        udało się ale pare uwag
+//        Nie wyświetlamy wiadomości w konsoli jako komunikat, zamiast tego albo zwracamy null / albo wyrzucamy wyjątek jeśli faktycznie doszło do skrajnego przypadku
+//        Nie ma potrzeby klonowania wartości .clone(), rozumiem że tu jest chęć zwrócenia nowej tablicy bez naruszania tej z argumentu, nie trzeba tak, możemy zamienić wartość w tej podanej
+//        temporary to raczej duży koszt, tablica 1 milion elementów zostanie skopiowana, może lepiej temporary to 1 zmienna która przechowuję swapowany element
+//        pętla for niepotrzebna, nie realizuje logiki tutaj żadnej
+//        if isSwappingArrayPossible niepotrzebny, jeśli pojawia się wcześniej return / exception i dojdzie do jego wywołania to on przerywa dalszy kod w metodzie
+//        generalnie zadanie było trudne także wynik interesującym, udało się
