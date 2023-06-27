@@ -11,20 +11,33 @@ public class School {
         this.school = school;
     }
 
+
+    public School() {
+    }
+
     public Map<String, Clazz> getSchool() {
         return school;
     }
 
     @Override
-    public boolean equals(Object o) {      // ilosc klas, ilosc uczniow.
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         School school1 = (School) o;
-        return Objects.equals(school, school1.school);
+
+        return Objects.equals(school.values().size(), school1.school.values().size());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(school);
+    }
+    
+    
+    public void showStudents(){
+
+        for (Map.Entry<String, Clazz> entry : school.entrySet()) {
+            System.out.println("Class name: " + entry.getKey() + " Students: " + entry.getValue().getStudents().toString());
+        }
     }
 }

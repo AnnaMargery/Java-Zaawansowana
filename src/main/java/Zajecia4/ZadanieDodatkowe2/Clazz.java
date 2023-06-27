@@ -22,11 +22,11 @@ public class Clazz {
         if (studentToAdd == null) throw new NullPointerException("Podany obiekt jest nullem");
 
         if (!this.students.contains(studentToAdd)) this.students.add(studentToAdd);
-//                for (Student student : this.students) {
-//            if (student.hashCode() != studentToAdd.hashCode())
+
+//            if (!students.get(0).equals(students.get(students.size())))
 //                this.students.add(studentToAdd);
-//    }
-    }
+        }
+
 
     public void delete(Student studentToDelete) {
 
@@ -45,15 +45,11 @@ public class Clazz {
     }
 
     @Override
-    public boolean equals(Object obj) {
-
-        if (obj instanceof Clazz) {
-            Clazz aClazz = (Clazz) obj;
-            Clazz a1Clazz = (Clazz) obj;
-
-            if (a1Clazz.getClassName().equals(aClazz.getClassName()) && a1Clazz.getStudents().size() == aClazz.getStudents().size()) ;
-            return true;
-        } else return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Clazz clazz = (Clazz) o;
+        return className.equals(clazz.className) && students.equals(clazz.students);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package Zajecia4.ZadanieDodatkowe2;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 //Na podstawie struktury klas uczniów w szkolę napisz mechanizm, który zwróci wszystkich uczniów danej szkoły.
 // Każda szkoła zawierać ma mapę klas szkolnych (klucz to nazwa klasy, wartość to obiekt Klasa),
@@ -20,31 +20,26 @@ public class Main {
         Student lukSow = new Student("Lukasz", "Sowa");
         Student zofRob = new Student("Zofia", "Robak");
 
-        System.out.println(annSze.equals(annSze1)); //true
-        System.out.println(annSze1.equals(annSze)); //true
+        Clazz students1a = new Clazz("1a", new ArrayList<>());
+        addingStudentsTo1a(annSze, annSze1, annBed, matZan, annKow, marKro, robSad, lukSow, zofRob, students1a);
 
-        System.out.println(annSze1.hashCode()); //annszew.hashCode= annsze1.hashCode
-        System.out.println(annSze.hashCode());
-
-
-        Clazz students1a = new Clazz("1a",new ArrayList<>());
-
-        students1a.getStudents().add(annSze);
-        students1a.getStudents().add(annBed);
-        students1a.getStudents().add(matZan);
-        students1a.getStudents().add(annKow);
-        students1a.getStudents().add(marKro);
-        students1a.getStudents().add(robSad);
-        students1a.getStudents().add(lukSow);
-        students1a.getStudents().add(zofRob);
-//        students1a.getStudents().add(annSze1);// dodaje duplikat- metoda contains nie wykrywa że osoba o takim imieniu i nazwisku juz widnieje.
-        students1a.showInfo();
-        System.out.println();
-
-
-        //tworze klase blizniacza do poprzedniej, aby sprawdzic funkcjonowanie metod equals i hash code.
         Clazz students2a = new Clazz("2a", new ArrayList<>());
+        addingStudentsTo2a(annSze, annSze1, annBed, matZan, annKow, marKro, robSad, lukSow, zofRob, students2a);
 
+        School school = new School(new HashMap<>());
+
+        addingClassesToSchool(students1a, students2a, school);
+        school.showStudents();
+
+
+    }
+
+    private static void addingClassesToSchool(Clazz students1a, Clazz students2a, School school) {
+        school.getSchool().put("1a", students1a);
+        school.getSchool().put("2a", students2a);
+    }
+
+    private static void addingStudentsTo2a(Student annSze, Student annSze1, Student annBed, Student matZan, Student annKow, Student marKro, Student robSad, Student lukSow, Student zofRob, Clazz students2a) {
         students2a.getStudents().add(annSze);
         students2a.getStudents().add(annBed);
         students2a.getStudents().add(matZan);
@@ -53,22 +48,19 @@ public class Main {
         students2a.getStudents().add(robSad);
         students2a.getStudents().add(lukSow);
         students2a.getStudents().add(zofRob);
-//         students2a.getStudents().add(annSze1);//nie dziala sprawdzanie indentycznych wartosci pol dla proby dodania ucznia o takich samych danych
-
-        System.out.println(students1a.equals(students2a)); // equals zwraca true
-        System.out.println(students2a.equals(students1a)); // equals zwraca true
-        System.out.println(students1a.equals(students1a)); // equals zwraca true
-
-        System.out.println((students1a.hashCode() == students2a.hashCode())); //hashCode zwraca true
-        System.out.println(students1a.hashCode());
-        System.out.println(students2a.hashCode());
-
-        System.out.println(students1a.getStudents().size()); //false
-        System.out.println(students2a.getStudents().size());
-
-        System.out.println(students1a.getClassName());
-        System.out.println(students2a.getClassName());
     }
 
+    private static void addingStudentsTo1a(Student annSze, Student annSze1, Student annBed, Student matZan, Student annKow, Student marKro, Student robSad, Student lukSow, Student zofRob, Clazz students1a) {
+        students1a.getStudents().add(annSze);
+        students1a.getStudents().add(annBed);
+        students1a.getStudents().add(matZan);
+        students1a.getStudents().add(annKow);
+        students1a.getStudents().add(marKro);
+        students1a.getStudents().add(robSad);
+        students1a.getStudents().add(lukSow);
+        students1a.getStudents().add(zofRob);
+    }
 }
+
+
 

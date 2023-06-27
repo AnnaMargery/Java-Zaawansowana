@@ -17,7 +17,7 @@ public class Student {
         System.out.println(String.format("Student name: %s %s ", this.firstName + this.secondName));
     }
 
-    public boolean equals(Object obj) { // działa, gdy porownuje pola dwoch obiektow, bedacych osobnymi instalcjami, nie działa dodajac do listy wykorzystajac contains
+    public boolean equals(Object obj) {
 
         if (obj instanceof Student) {
             Student student1 = (Student) obj;
@@ -25,6 +25,14 @@ public class Student {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                '}';
     }
 
     public int hashCode() { // działa, gdy porownuje pola dwoch obiektow, bedacych osobnymi instalcjami
